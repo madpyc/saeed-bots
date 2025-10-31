@@ -1,0 +1,40 @@
+-- Migration: quizzes, lessons, memory (progress)
+PRAGMA foreign_keys=off;
+BEGIN TRANSACTION;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  chat_id TEXT UNIQUE NOT NULL,
+  name TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS lessons (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  content TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS questions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  lesson_id INTEGER NOT NULL,
+  question TEXT NOT NULL,
+  a TEXT NOT NULL,
+  b TEXT NOT NULL,
+  c TEXT NOT NULL,
+  d TEXT NOT NULL,
+  correct TEXT NOT NULL CHECK (correct IN ('a','b','c','d')),
+  FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS progress (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  chat_id TEXT NOT NULL,
+  lesson_id INTEGER NOT NULL,
+  q_index INTEGER NOT NULL DEFAULT 0,
+  score INTEGER NOT NULL DEFAULT 0,
+  UNIQUE(chat_id, lesson_id)
+);
+
+COMMIT;
+PRAGMA foreign_keys=on;

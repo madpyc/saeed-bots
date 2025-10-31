@@ -1,0 +1,7 @@
+:root { font-family: Vazirmatn, system-ui, sans-serif; }
+body { margin: 0; background: #0f172a; color: #e2e8f0; }
+main { max-width: 720px; margin: 32px auto; padding: 16px; }
+h1 { font-weight: 800; }
+textarea { width: 100%; border-radius: 12px; padding: 12px; border: 1px solid #334155; background: #111827; color: #e5e7eb; }
+button { margin-top: 12px; padding: 10px 16px; border-radius: 12px; border: none; background: #22c55e; color: #0b1220; font-weight: 700; cursor: pointer; }
+pre { background: #0b1220; padding: 12px; border-radius: 12px; white-space: pre-wrap; }

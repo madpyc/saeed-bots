@@ -1,0 +1,42 @@
+name = "saeed-bot"
+main = "src/index.ts"
+compatibility_date = "2025-10-31"
+node_compat = true
+
+# Bindings
+[[d1_databases]]
+binding = "DB"
+database_name = "saeed_db"
+database_id = "${D1_DATABASE_ID}"
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "${KV_NAMESPACE_ID}"
+
+[vars]
+ADMIN_PASS = "${ADMIN_PASS}"
+R2_PUBLIC_BASE = ""  # اختیاری: اگر دامنه پابلیک برای R2 داری، اینجا بگذار
+BOT_NAME = "سعید"
+BOT_LOCALE = "fa-IR"
+TELEGRAM_BOT_USERNAME = "${TELEGRAM_BOT_USERNAME}"
+WEBAPP_URL = "${WEBAPP_URL}"
+PROVIDER_ORDER = "openai,workersai,huggingface"
+BATCH_WINDOW_MS = "120"
+OPENAI_VISION_MODEL = "gpt-5-vision" # prefer GPT-5 for images if available
+OPENAI_TEXT_MODEL = "gpt-5"          # prefer GPT-5 for text if available
+
+[ai]
+binding = "AI"
+
+[observability]
+enabled = true
+
+# [routes]
+# { pattern = "bot.yourdomain.com", custom_domain = true }
+
+[env.production]
+vars = { }
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "saeed-bucket"
