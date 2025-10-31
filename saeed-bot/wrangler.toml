@@ -1,9 +1,12 @@
 name = "saeed-bot"
 main = "src/index.ts"
 compatibility_date = "2025-10-31"
-node_compat = true
+nodejs_compat = true
 
-# Bindings
+# -----------------------------
+# ⚙️ BINDINGS
+# -----------------------------
+
 [[d1_databases]]
 binding = "DB"
 database_name = "saeed_db"
@@ -13,30 +16,47 @@ database_id = "${D1_DATABASE_ID}"
 binding = "SESSIONS"
 id = "${KV_NAMESPACE_ID}"
 
+# (اختیاری) اگر R2 نمی‌خوای حذفش کن
+# [[r2_buckets]]
+# binding = "R2"
+# bucket_name = "saeed-bucket"
+
 [vars]
 ADMIN_PASS = "${ADMIN_PASS}"
-R2_PUBLIC_BASE = ""  # اختیاری: اگر دامنه پابلیک برای R2 داری، اینجا بگذار
-BOT_NAME = "سعید"
-BOT_LOCALE = "fa-IR"
+PUBLIC_BASE = "${WEBAPP_URL}"
+NAME = "Saeed"
+LOCALE = "fa-IR"
 TELEGRAM_BOT_USERNAME = "${TELEGRAM_BOT_USERNAME}"
-WEBAPP_URL = "${WEBAPP_URL}"
-PROVIDER_ORDER = "openai,workersai,huggingface"
-BATCH_WINDOW_MS = "120"
-OPENAI_VISION_MODEL = "gpt-5-vision" # prefer GPT-5 for images if available
-OPENAI_TEXT_MODEL = "gpt-5"          # prefer GPT-5 for text if available
+TELEGRAM_BOT_TOKEN = "${TELEGRAM_BOT_TOKEN}"
+OPENAI_API_KEY = "${OPENAI_API_KEY}"
+HF_API_TOKEN = "${HF_API_TOKEN}"
+MODEL_ORDER = "openai,workersai,huggingface"
+AI_VISION_MODEL = "gpt-5-vision"   # مدل ترجیحی برای عکس‌ها
+AI_TEXT_MODEL = "gpt-5"            # مدل ترجیحی برای متن‌ها
+MEMORY_WINDOW_MS = "1020"
 
+# -----------------------------
+# ⚙️ BINDING AI
+# -----------------------------
 [ai]
 binding = "AI"
 
-[observability]
+# -----------------------------
+# ⚙️ DURABILITY
+# -----------------------------
+[durability]
 enabled = true
 
+# -----------------------------
+# ⚙️ ROUTING (اختیاری)
+# اگر دامنه داری می‌تونی این بخش رو فعال کنی
+# -----------------------------
 # [routes]
-# { pattern = "bot.yourdomain.com", custom_domain = true }
+# pattern = "bot.yourdomain.com"
+# custom_domain = true
 
+# -----------------------------
+# ⚙️ ENVIRONMENTS
+# -----------------------------
 [env.production]
-vars = { }
-
-[[r2_buckets]]
-binding = "R2"
-bucket_name = "saeed-bucket"
+vars = { MODE = "production" }
